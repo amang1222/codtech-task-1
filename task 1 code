@@ -1,0 +1,124 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define MIN_LENGTH 8
+#define MAX_LENGTH 20
+
+// Function to check if the password contains at least one uppercase letter
+bool has_uppercase(const char *password) {
+    while (*password) {
+        if (isupper((unsigned char)*password)) {
+            return true;
+        }
+        password++;
+    }
+    return false;
+}
+
+// Function to check if the password contains at least one lowercase letter
+bool has_lowercase(const char *password) {
+    while (*password) {
+        if (islower((unsigned char)*password)) {
+            return true;
+        }
+        password++;
+    }
+    return false;
+}
+
+// Function to check if the password contains at least one digit
+bool has_digit(const char *password) {
+    while (*password) {
+        if (isdigit((unsigned char)*password)) {
+            return true;
+        }
+        password++;
+    }
+    return false;
+}
+
+// Function to check if the password contains at least one special character
+bool has_special_char(const char *password) {
+    while (*password) {
+        if (ispunct((unsigned char)*password)) {
+            return true;
+        }
+        password++;
+    }
+    return false;
+}
+
+// Function to check for repeated characters
+bool has_repeated_chars(const char *password) {
+    for (size_t i = 0; i < strlen(password); i++) {
+        for (size_t j = i + 1; j < strlen(password); j++) {
+            if (password[i] == password[j]) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+// Function to assess the strength of the password
+void assess_password(const char *password) {
+    size_t length = strlen(password);
+    bool is_strong = true;
+
+    if (length < MIN_LENGTH || length > MAX_LENGTH) {
+        printf("Password length should be between %d and %d characters.\n", MIN_LENGTH, MAX_LENGTH);
+        is_strong = false;
+    }
+
+    if (!has_uppercase(password)) {
+        printf("Password must contain at least one uppercase letter.\n");
+        is_strong = false;
+    }
+
+    if (!has_lowercase(password)) {
+        printf("Password must contain at least one lowercase letter.\n");
+        is_strong = false;
+    }
+
+    if (!has_digit(password)) {
+        printf("Password must contain at least one digit.\n");
+        is_strong = false;
+    }
+
+    if (!has_special_char(password)) {
+        printf("Password must contain at least one special character.\n");
+        is_strong = false;
+    }
+
+    if (has_repeated_chars(password)) {
+        printf("Password should not contain repeated characters.\n");
+        is_strong = false;
+    }
+
+    if (is_strong) {
+        printf("Password is strong.\n");
+    } else {
+        printf("Password is weak.\n");
+    }
+}
+
+int main() {
+    char password[256];
+
+    printf("Enter a password to assess: ");
+    if (fgets(password, sizeof(password), stdin) != NULL) {
+        // Remove newline character if present
+        size_t len = strlen(password);
+        if (len > 0 && password[len - 1] == '\n') {
+            password[len - 1] = '\0';
+        }
+
+        assess_password(password);
+    } else {
+        printf("Failed to read the password.\n");
+    }
+
+    return 0;
+}
