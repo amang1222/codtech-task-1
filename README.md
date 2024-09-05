@@ -1,4 +1,4 @@
-![Screenshot (1)](https://github.com/user-attachments/assets/08f67ef6-df81-4b26-93c7-9a5efc8e020b)
+ko![Screenshot (1)](https://github.com/user-attachments/assets/08f67ef6-df81-4b26-93c7-9a5efc8e020b)
 *NAME* : AMAN KUMAR GUPTA
 
 *COMPANY* : CODTECH IT SOLUTION
@@ -32,8 +32,3 @@ feedback on password strength.
 
 *Feedback System:* The tool provides feedback based on the password's weaknesses and assigns a strength category (Very Weak, Weak, Moderate, Strong, Very Strong).
 
-## Running the Program:
-
-- Save the code in a file called *'PasswordStrengthChecker.java'*.
-- Compile the file using *'javac PasswordStrengthChecker.java'*.
-- Run the program using *'java PasswordStrengthChecker'*.
